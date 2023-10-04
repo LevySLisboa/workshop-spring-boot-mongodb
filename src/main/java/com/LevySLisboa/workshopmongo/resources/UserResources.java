@@ -1,5 +1,6 @@
 package com.LevySLisboa.workshopmongo.resources;
 
+import com.LevySLisboa.workshopmongo.domain.Post;
 import com.LevySLisboa.workshopmongo.domain.User;
 import com.LevySLisboa.workshopmongo.dto.UserDTO;
 import com.LevySLisboa.workshopmongo.services.UserServices;
@@ -52,5 +53,9 @@ public class UserResources {
         return ResponseEntity.noContent().build();
     }
 
-
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
+    }
 }
